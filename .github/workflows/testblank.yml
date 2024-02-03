@@ -44,7 +44,6 @@ jobs:
       - name: Runner workspace path
         run: |
           echo "Cleaning up previous run"
-          rm -rf "${{ github.workspace }}"
 
   build-uipath-nuget-package:
     # You should be able to run on windows 2019 or windows latest
