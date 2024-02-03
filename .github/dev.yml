@@ -1,9 +1,9 @@
 name: Development
 
-on:
   push:
-    branches:
-      - develop
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 # Here the environment variable is declared in workflow level
 env:
