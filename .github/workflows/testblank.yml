@@ -17,7 +17,7 @@ on:
 env:
   # Replace with your Orchestrator Values 
   PROJECT_NAME: uipath.github.action                         
-  PROJECT_FOLDER: ${{ github.action_path }}
+  PROJECT_FOLDER: Excel_Process
   ORCH_URL: https://cloud.uipath.com/dhanrajvlvd/DefaultTenant
   ORCH_TENANT: DefaultTenant
   ORCH_CLIENT_ID: 2367d37b-6a3d-4ac1-b7a7-6a555f1eaf09
