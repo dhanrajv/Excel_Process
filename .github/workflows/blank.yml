@@ -1,4 +1,4 @@
-name: Development workflow
+name: Development
 
 on:
   push:
@@ -14,7 +14,7 @@ env:
   ORCH_TENANT: ${{ secrets.UIPATHTENANTNAME }}
   ORCH_CLIENT_ID: ${{ secrets.UIPATHCLIENTID }}
   ORCH_USER_KEY: ${{ secrets.UIPATHUSERKEY }}
-  ORCH_ACC_NAME: ${{ secrets.UIPATHACCOUNTNAME }}
+  ORCH_ACC_NAME:
 
 jobs:
   print-details:
