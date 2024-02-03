@@ -18,7 +18,7 @@ env:
 
 jobs:
   print-details:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: echo-default-env-variables
         run: |
@@ -32,7 +32,7 @@ jobs:
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
   cleaner:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Runner workspace path
         run: |
@@ -83,7 +83,7 @@ jobs:
   # Create Pull Request for Merge & Review
   create-pull-request:
     needs: test-uipath-published-package
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -98,7 +98,7 @@ jobs:
   # "notify" workflow for slack notification
   notify:
     name: Notify on Slack
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     # Only run this workflow when "build" workflow succeeds
     needs: [ test-uipath-published-package]
     # Only run this workflow if it target is main branch on pull_request event
