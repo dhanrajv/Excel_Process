@@ -117,7 +117,7 @@ $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $debugLog = "$scriptPath\orchestrator-package-deploy.log"
 
 #Verifying UiPath CLI installation
-$cliVersion = "1.0.7985.19721"; #CLI Version (Script was tested on this latest version at the time)
+$cliVersion = "22.10.8438.32859"; #CLI Version (Script was tested on this latest version at the time)
 
 $uipathCLI = "$scriptPath\uipathcli\$cliVersion\lib\net461\uipcli.exe"
 if (-not(Test-Path -Path $uipathCLI -PathType Leaf)) {
