@@ -21,7 +21,7 @@ env:
   ORCH_TENANT: Default
   ORCH_CLIENT_ID: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
   ORCH_USER_KEY: 5R4sViy^ZzVVzdsD
-  ORCH_applicationScope : OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Users.Read OR.Jobs
+  ORCH_applicationScope : 'OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Users.Read OR.Jobs'
 
 jobs:
   print-details:
