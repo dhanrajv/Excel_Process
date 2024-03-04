@@ -73,7 +73,7 @@ jobs:
           name: Artifacts
       - name: Publish Nuget Package to DEV
         shell: pwsh
-        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -applicationScope ${{env.ORCH_applicationScope}}
+        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -applicationScope ${{env.ORCH_applicationScope}}
    
   test-uipath-published-package:
     needs: publish-uipath-nuget-package
