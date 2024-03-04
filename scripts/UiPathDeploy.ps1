@@ -72,13 +72,13 @@ Param (
 
     #Required
 	[string] $packages_path = "", # Required. The path to a folder containing packages, or to a package file.
-	[string] $orchestrator_url = "", #Required. The URL of the Orchestrator instance.
-	[string] $orchestrator_tenant = "", #Required. The tenant of the Orchestrator instance.
+	[string] $orchestrator_url = "https://hpsilt435.hpillc.local:444", #Required. The URL of the Orchestrator instance.
+	[string] $orchestrator_tenant = "Default", #Required. The tenant of the Orchestrator instance.
 
     #External Apps (Option 1)
     [string] $accountForApp = "", #The Orchestrator CloudRPA account name. Must be used together with id, secret and scope(s) for external application.
-    [string] $applicationId = "", #Required. The external application id. Must be used together with account, secret and scope(s) for external application.
-    [string] $applicationSecret = "", #Required. The external application secret. Must be used together with account, id and scope(s) for external application.
+    [string] $applicationId = "2183c503-bc6e-479f-aa90-842d8d7b5ebe", #Required. The external application id. Must be used together with account, secret and scope(s) for external application.
+    [string] $applicationSecret = "5R4sViy^ZzVVzdsD", #Required. The external application secret. Must be used together with account, id and scope(s) for external application.
     [string] $applicationScope = "OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Jobs OR.Users.Read OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules", #Required. The space-separated list of application scopes. Must be used together with account, id and secret for external application.
 
     #API Access - (Option 2)
