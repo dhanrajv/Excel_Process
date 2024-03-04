@@ -25,7 +25,7 @@ env:
 
 jobs:
   print-details:
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
       - name: echo-default-env-variables
         run: |
