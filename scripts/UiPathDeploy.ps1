@@ -79,8 +79,8 @@ Param (
     [string] $accountForApp = "", #The Orchestrator CloudRPA account name. Must be used together with id, secret and scope(s) for external application.
     [string] $applicationId = "", #Required. The external application id. Must be used together with account, secret and scope(s) for external application.
     [string] $applicationSecret = "", #Required. The external application secret. Must be used together with account, id and scope(s) for external application.
-    [string] $applicationScope = "OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Jobs OR.Users.Read OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules" 
-    #Required. The space-separated list of application scopes. Must be used together with account, id and secret for external application.
+    [string] $applicationScope = "OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Jobs OR.Users.Read OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules", #Required. The space-separated list of application scopes. Must be used together with account, id and secret for external application.
+
     #API Access - (Option 2)
     [string] $account_name = "", #Required. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
 	[string] $UserKey = "", #Required. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
@@ -172,12 +172,10 @@ $ParamList.Add($packages_path)
 $ParamList.Add($orchestrator_url)
 $ParamList.Add($orchestrator_tenant)
 
-WriteLog $applicationId
 if($applicationId -ne ""){
     $ParamList.Add("--applicationId")
     $ParamList.Add($applicationId)
 }
-WriteLog $applicationSecret
 if($applicationSecret -ne ""){
     $ParamList.Add("--applicationSecret")
     $ParamList.Add($applicationSecret)
@@ -188,10 +186,14 @@ if($applicationScope -ne ""){
     $ParamList.Add($applicationScope)
 }
 
+
+#mask sensitive info before logging 
+
+
 #log cli call with parameters
 WriteLog "Executing $uipathCLI"
 WriteLog "-----------------------------------------------------------------------------"
-WriteLog $ParamList.ToArray()
+
 #call uipath cli 
 & "$uipathCLI" $ParamList.ToArray()
 
