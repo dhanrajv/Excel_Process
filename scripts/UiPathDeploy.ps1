@@ -173,55 +173,21 @@ $ParamList.Add($orchestrator_url)
 $ParamList.Add($orchestrator_tenant)
 
 if($applicationId -ne ""){
-    $ParamList.Add("--applicationId")
+    $ParamList.Add("-applicationId")
     $ParamList.Add($applicationId)
 }
 if($applicationSecret -ne ""){
-    $ParamList.Add("--applicationSecret")
+    $ParamList.Add("-applicationSecret")
     $ParamList.Add($applicationSecret)
 }
 WriteLog $applicationScope
 if($applicationScope -ne ""){
-    $ParamList.Add("--applicationScope")
+    $ParamList.Add("-applicationScope")
     $ParamList.Add($applicationScope)
 }
 
-if($folder_organization_unit -ne ""){
-    $ParamList.Add("--organizationUnit")
-    $ParamList.Add($folder_organization_unit)
-}
-if($environment_list -ne ""){
-    $ParamList.Add("--environments")
-    $ParamList.Add("`"$environment_list`"")
-}
-
-if($language -ne ""){
-    $ParamList.Add("--language")
-    $ParamList.Add($language)
-}
-
-#mask sensitive info before logging 
-$ParamMask = New-Object 'Collections.Generic.List[string]'
-$ParamMask.AddRange($ParamList)
-$secretIndex = $ParamMask.IndexOf("--password");
-if($secretIndex -ge 0){
-    $ParamMask[$secretIndex + 1] = ("*" * 15)
-}
-$secretIndex = $ParamMask.IndexOf("--token");
-if($secretIndex -ge 0){
-    $ParamMask[$secretIndex + 1] = $userKey.Substring(0, [Math]::Min($userKey.Length, 4)) + ("*" * 15)
-}
-$secretIndex = $ParamMask.IndexOf("--applicationId");
-if($secretIndex -ge 0){
-    $ParamMask[$secretIndex + 1] = $applicationId.Substring(0, [Math]::Min($applicationId.Length, 4)) + ("*" * 15)
-}
-$secretIndex = $ParamMask.IndexOf("--applicationSecret");
-if($secretIndex -ge 0){
-    $ParamMask[$secretIndex + 1] = ("*" * 15)
-}
-
 #log cli call with parameters
-WriteLog "Executing $uipathCLI $ParamMask"
+WriteLog "Executing $uipathCLI"
 WriteLog "-----------------------------------------------------------------------------"
 
 #call uipath cli 
