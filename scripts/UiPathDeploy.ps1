@@ -121,13 +121,7 @@ $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $debugLog = "$scriptPath\orchestrator-package-deploy.log"
 
 #Validate provided cli folder (if any)
-if($uipathCliFilePath -ne ""){
-    $uipathCLI = "$uipathCliFilePath"
-    if (-not(Test-Path -Path $uipathCLI -PathType Leaf)) {
-        WriteLog "UiPath cli file path provided does not exist in the provided path $uipathCliFilePath.`r`nDo not provide uipathCliFilePath paramter if you want the script to auto download the cli from UiPath Public feed"
-        exit 1
-    }
-}else{
+
     #Verifying UiPath CLI installation
     $cliVersion = "22.10.8438.32859"; #CLI Version (Script was tested on this latest version at the time)
 
@@ -154,7 +148,7 @@ if($uipathCliFilePath -ne ""){
         }
         
     }
-}
+
 WriteLog "-----------------------------------------------------------------------------"
 WriteLog "uipcli location :   $uipathCLI"
 #END Verifying UiPath CLI installation
