@@ -172,24 +172,26 @@ $ParamList.Add($packages_path)
 $ParamList.Add($orchestrator_url)
 $ParamList.Add($orchestrator_tenant)
 
+WriteLog $applicationId
 if($applicationId -ne ""){
-    $ParamList.Add("-applicationId")
+    $ParamList.Add("--applicationId")
     $ParamList.Add($applicationId)
 }
+WriteLog $applicationSecret
 if($applicationSecret -ne ""){
-    $ParamList.Add("-applicationSecret")
+    $ParamList.Add("--applicationSecret")
     $ParamList.Add($applicationSecret)
 }
 WriteLog $applicationScope
 if($applicationScope -ne ""){
-    $ParamList.Add("-applicationScope")
+    $ParamList.Add("--applicationScope")
     $ParamList.Add($applicationScope)
 }
 
 #log cli call with parameters
 WriteLog "Executing $uipathCLI"
 WriteLog "-----------------------------------------------------------------------------"
-
+WriteLog $ParamList.ToArray()
 #call uipath cli 
 & "$uipathCLI" $ParamList.ToArray()
 
