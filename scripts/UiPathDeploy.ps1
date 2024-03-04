@@ -79,7 +79,7 @@ Param (
     [string] $accountForApp = "", #The Orchestrator CloudRPA account name. Must be used together with id, secret and scope(s) for external application.
     [string] $applicationId = "", #Required. The external application id. Must be used together with account, secret and scope(s) for external application.
     [string] $applicationSecret = "", #Required. The external application secret. Must be used together with account, id and scope(s) for external application.
-    [string] $applicationScope = "", #Required. The space-separated list of application scopes. Must be used together with account, id and secret for external application.
+    [string] $applicationScope = "OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Jobs OR.Users.Read OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules", #Required. The space-separated list of application scopes. Must be used together with account, id and secret for external application.
 
     #API Access - (Option 2)
     [string] $account_name = "", #Required. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
