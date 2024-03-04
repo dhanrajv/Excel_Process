@@ -121,7 +121,13 @@ $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $debugLog = "$scriptPath\orchestrator-package-deploy.log"
 
 #Validate provided cli folder (if any)
-
+if($uipathCliFilePath -ne ""){
+    $uipathCLI = "$uipathCliFilePath"
+    if (-not(Test-Path -Path $uipathCLI -PathType Leaf)) {
+        WriteLog "UiPath cli file path provided does not exist in the provided path $uipathCliFilePath.`r`nDo not provide uipathCliFilePath paramter if you want the script to auto download the cli from UiPath Public feed"
+        exit 1
+    }
+}else{
     #Verifying UiPath CLI installation
     $cliVersion = "22.10.8438.32859"; #CLI Version (Script was tested on this latest version at the time)
 
@@ -148,7 +154,7 @@ $debugLog = "$scriptPath\orchestrator-package-deploy.log"
         }
         
     }
-
+}
 WriteLog "-----------------------------------------------------------------------------"
 WriteLog "uipcli location :   $uipathCLI"
 #END Verifying UiPath CLI installation
@@ -163,17 +169,6 @@ if($packages_path -eq "" -or $orchestrator_url -eq "" -or $orchestrator_tenant -
     exit 1
 }
 
-if($accountForApp -eq "" -or $applicationId -eq "" -or $applicationSecret -eq "" -or $applicationScope -eq "")
-{
-    if($account_name -eq "" -or $UserKey -eq "")
-    {
-        if($orchestrator_user -eq "" -or $orchestrator_pass -eq "")
-        {
-            WriteLog "Fill the required paramters (External App OAuth, API Access, or Username & Password)"
-            exit 1
-        }
-    }
-}
 #endregion Verifying required paramteters
 
 #Building uipath cli paramters
@@ -183,10 +178,6 @@ $ParamList.Add($packages_path)
 $ParamList.Add($orchestrator_url)
 $ParamList.Add($orchestrator_tenant)
 
-if($accountForApp -ne ""){
-    $ParamList.Add("--accountForApp")
-    $ParamList.Add($accountForApp)
-}
 if($applicationId -ne ""){
     $ParamList.Add("--applicationId")
     $ParamList.Add($applicationId)
@@ -195,26 +186,12 @@ if($applicationSecret -ne ""){
     $ParamList.Add("--applicationSecret")
     $ParamList.Add($applicationSecret)
 }
+WriteLog $applicationScope
 if($applicationScope -ne ""){
     $ParamList.Add("--applicationScope")
-    $ParamList.Add("`"$applicationScope`"")
+    $ParamList.Add($applicationScope)
 }
-if($account_name -ne ""){
-    $ParamList.Add("--accountName")
-    $ParamList.Add($account_name)
-}
-if($UserKey -ne ""){
-    $ParamList.Add("--token")
-    $ParamList.Add($UserKey)
-}
-if($orchestrator_user -ne ""){
-    $ParamList.Add("--username")
-    $ParamList.Add($orchestrator_user)
-}
-if($orchestrator_pass -ne ""){
-    $ParamList.Add("--password")
-    $ParamList.Add($orchestrator_pass)
-}
+
 if($folder_organization_unit -ne ""){
     $ParamList.Add("--organizationUnit")
     $ParamList.Add($folder_organization_unit)
@@ -227,15 +204,6 @@ if($environment_list -ne ""){
 if($language -ne ""){
     $ParamList.Add("--language")
     $ParamList.Add($language)
-}
-
-if($disableTelemetry -ne ""){
-    $ParamList.Add("--disableTelemetry")
-    $ParamList.Add($disableTelemetry)
-}
-if($entryPoints -ne ""){
-    $ParamList.Add("--entryPointsPath")
-    $ParamList.Add($entryPoints)
 }
 
 #mask sensitive info before logging 
