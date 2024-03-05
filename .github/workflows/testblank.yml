@@ -17,10 +17,10 @@ env:
   # Replace with your Orchestrator Values 
   PROJECT_NAME: uipath.github.action                         
   PROJECT_FOLDER: ${{ github.action_path }}
-  ORCH_URL: 'https://hpsilt435.hpillc.local:444'
-  ORCH_TENANT: Default
-  ORCH_applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
-  ORCH_applicationSecret: 5R4sViy^ZzVVzdsD
+  ORCH_URL: "https://hpsilt435.hpillc.local:444"
+  ORCH_TENANT: "Default"
+  ORCH_applicationId: "2183c503-bc6e-479f-aa90-842d8d7b5ebe"
+  ORCH_applicationSecret: "5R4sViy^ZzVVzdsD"
   ORCH_applicationScope : "OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Users.Read OR.Jobs"
 
 jobs:
