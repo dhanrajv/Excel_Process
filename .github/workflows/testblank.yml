@@ -21,7 +21,6 @@ env:
   ORCH_TENANT: Default
   applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
   applicationSecret: 5R4sViy^ZzVVzdsD
-  ORCH_applicationScope : ${{vars.SCOPE}}
 
 jobs:
   print-details:
@@ -52,7 +51,7 @@ jobs:
     steps: 
       - name: Publish Nuget Package to DEV
         shell: pwsh
-        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{vars.SCOPE}}
+        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}}
    
   test-uipath-published-package:
     needs: publish-uipath-nuget-package
