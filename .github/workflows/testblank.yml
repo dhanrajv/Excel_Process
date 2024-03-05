@@ -52,7 +52,7 @@ jobs:
     steps: 
       - name: Publish Nuget Package to DEV
         shell: pwsh
-        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{env.ORCH_applicationScope}}
+        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{vars.SCOPE}}
    
   test-uipath-published-package:
     needs: publish-uipath-nuget-package
