@@ -21,7 +21,7 @@ env:
   ORCH_TENANT: Default
   applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
   applicationSecret: 5R4sViy^ZzVVzdsD
-  ORCH_applicationScope : $env.Scope
+  ORCH_applicationScope : ${{vars.Scope}}
 
 jobs:
   print-details:
