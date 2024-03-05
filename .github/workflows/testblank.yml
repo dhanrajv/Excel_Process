@@ -21,6 +21,7 @@ env:
   ORCH_TENANT: Default
   applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
   applicationSecret: 5R4sViy^ZzVVzdsD
+  ORCH_applicationScope : 'OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Users.Read OR.Jobs'
 
 jobs:
   print-details:
@@ -44,14 +45,35 @@ jobs:
         run: |
           echo "Cleaning up previous run"
 
-
-
-  publish-uipath-nuget-package:
+  build-uipath-nuget-package:
+    # You should be able to run on windows 2019 or windows latest
+    needs: cleaner
     runs-on: self-hosted
     steps: 
+      - name: Check out repository code
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v2
+      - name: Build Nuget Package
+        shell: pwsh
+        #run: ${{ github.workspace }}\scripts\UiPathPack.ps1 ${{ github.workspace }}\project.json -destination_folder ${{ github.workspace }}\package
+      - name: Upload UiPath Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artifacts
+          path: |
+           package/*.*
+           scripts/*.ps1
+  publish-uipath-nuget-package:
+    needs: build-uipath-nuget-package
+    runs-on: self-hosted
+    steps: 
+      - name: Download UiPath Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: Artifacts
       - name: Publish Nuget Package to DEV
         shell: pwsh
-        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}}
+        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{env.ORCH_applicationScope}}
    
   test-uipath-published-package:
     needs: publish-uipath-nuget-package
