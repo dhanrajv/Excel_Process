@@ -19,8 +19,8 @@ env:
   PROJECT_FOLDER: ${{ github.action_path }}
   ORCH_URL: https://hpsilt435.hpillc.local:444
   ORCH_TENANT: Default
-  ORCH_CLIENT_ID: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
-  ORCH_USER_KEY: 5R4sViy^ZzVVzdsD
+  applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
+  applicationSecret: 5R4sViy^ZzVVzdsD
   ORCH_applicationScope : 'OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Users.Read OR.Jobs'
 
 jobs:
@@ -84,7 +84,7 @@ jobs:
         with:
           name: Artifacts
       - name: Test the Package With Test Cases 
-        run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
+        run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{env.ORCH_applicationScope}}
   
   # Create Pull Request for Merge & Review
   create-pull-request:
