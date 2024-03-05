@@ -19,8 +19,8 @@ env:
   PROJECT_FOLDER: ${{ github.action_path }}
   ORCH_URL: https://hpsilt435.hpillc.local:444
   ORCH_TENANT: Default
-  applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
-  applicationSecret: 5R4sViy^ZzVVzdsD
+  ORCH_applicationId: 2183c503-bc6e-479f-aa90-842d8d7b5ebe
+  ORCH_applicationSecret: 5R4sViy^ZzVVzdsD
   ORCH_applicationScope : 'OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings.Read OR.Robots.Read OR.Machines.Read OR.Execution OR.Assets OR.Users.Read OR.Jobs'
 
 jobs:
@@ -73,7 +73,7 @@ jobs:
           name: Artifacts
       - name: Publish Nuget Package to DEV
         shell: pwsh
-        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{env.ORCH_applicationScope}}
+        run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.ORCH_applicationId}} -applicationSecret ${{env.ORCH_applicationSecret}} -applicationScope ${{env.ORCH_applicationScope}}
    
   test-uipath-published-package:
     needs: publish-uipath-nuget-package
