@@ -50,10 +50,6 @@ jobs:
   publish-uipath-nuget-package:
     runs-on: self-hosted
     steps: 
-      - name: Download UiPath Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: Artifacts
       - name: Publish Nuget Package to DEV
         shell: pwsh
         run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -applicationId ${{env.applicationId}} -applicationSecret ${{env.applicationSecret}} -applicationScope ${{env.ORCH_applicationScope}}
