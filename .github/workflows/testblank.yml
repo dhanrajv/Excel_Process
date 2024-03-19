@@ -26,18 +26,24 @@ env:
 jobs:
   print-details:
     runs-on: self-hosted
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Generate HTML
-        run: |
-          npm i node-json2html
-          json2html -i ${{ github.workspace }}\QA-Unitrac.json -o output.html -c Name Status
-          echo "HTML file generated."
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      - name: Upload HTML artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: html-output
-          path: output.html
+    - name: Install dependencies
+      run: npm install js-yaml
+
+    - name: Generate HTML
+      run: node generateHTML.js
+
+    - name: Upload HTML artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: html-output
+        path: output.html
