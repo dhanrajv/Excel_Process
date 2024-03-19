@@ -4,10 +4,10 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 // Load the YAML data
-const data = yaml.load(fs.readFileSync('data.yml', 'utf8'));
+const jsonData = JSON.parse(fs.readFileSync('QA-Unitrac.json', 'utf8'));
 
 // Extract the "Name" and "Status" fields from each "TestCaseExecution"
-const rows = data.TestSetExecutions[0].TestCaseExecutions.map(testCase => ({
+const rows = jsonData.TestSetExecutions[0].TestCaseExecutions.map(testCase => ({
     Name: testCase.Name,
     Status: testCase.Status
 }));
