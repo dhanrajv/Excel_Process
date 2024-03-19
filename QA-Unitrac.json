@@ -1,0 +1,77 @@
+{
+  "TestSetExecutions": [
+    {
+      "Id": 165,
+      "TestSetId": 112,
+      "Name": "QA-Unitrac",
+      "Environment": "Default",
+      "TestCasesCount": 3,
+      "FailuresCount": 0,
+      "Time": 245600.0,
+      "DurationMs": 245600.0,
+      "Packages": [
+        {
+          "Name": "QA-Unitrac",
+          "Version": "1.0.*"
+        }
+      ],
+      "StartTime": "2024-03-18T18:27:56.687Z",
+      "TestCaseExecutions": [
+        {
+          "Id": 427,
+          "TestCaseId": 124,
+          "Name": "E2E\\Smoke Suite\\Lender Maintenance\\Lender_CPI Accounting_Lender Escrow Service.xaml",
+          "Assertions": [],
+          "PackageIdentifier": "QA-Unitrac",
+          "Status": "Failed",
+          "StartTime": "2024-03-18T18:27:56.687Z",
+          "JobId": "176914",
+          "DurationMs": 61353.0,
+          "EntryPointPath": "E2E\\Smoke Suite\\Lender Maintenance\\Lender_CPI Accounting_Lender Escrow Service.xaml",
+          "VersionNumber": "1.0.164485599",
+          "InputArguments": null,
+          "OutputArguments": "{}",
+          "RobotLogs": null,
+          "DataVariationIdentifier": null
+        },
+        {
+          "Id": 428,
+          "TestCaseId": 125,
+          "Name": "E2E\\Smoke Suite\\Loan Search\\Create a New Loan - Vehicle.xaml",
+          "Assertions": [],
+          "PackageIdentifier": "QA-Unitrac",
+          "Status": "Failed",
+          "StartTime": "2024-03-18T18:29:26.913Z",
+          "JobId": "176915",
+          "DurationMs": 96474.0,
+          "EntryPointPath": "E2E\\Smoke Suite\\Loan Search\\Create a New Loan - Vehicle.xaml",
+          "VersionNumber": "1.0.164485599",
+          "InputArguments": null,
+          "OutputArguments": "{\"out_LoanNumber\":null}",
+          "RobotLogs": null,
+          "DataVariationIdentifier": null
+        },
+        {
+          "Id": 429,
+          "TestCaseId": 127,
+          "Name": "E2E\\Smoke Suite\\Loan Search\\Owner Type - Audit History.xaml",
+          "Assertions": [],
+          "PackageIdentifier": "QA-Unitrac",
+          "Status": "Failed",
+          "StartTime": "2024-03-18T18:31:27.767Z",
+          "JobId": "176916",
+          "DurationMs": 34520.0,
+          "EntryPointPath": "E2E\\Smoke Suite\\Loan Search\\Owner Type - Audit History.xaml",
+          "VersionNumber": "1.0.164485599",
+          "InputArguments": null,
+          "OutputArguments": "{}",
+          "RobotLogs": null,
+          "DataVariationIdentifier": null
+        }
+      ],
+      "CanceledCount": 0,
+      "Status": "Failed",
+      "ErrorsCount": 3
+    }
+  ]
+}
