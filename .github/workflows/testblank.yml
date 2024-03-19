@@ -37,8 +37,8 @@ jobs:
 
       - name: Generate HTML
         run: |
-          npm install -g json-to-html-table
-          json-to-html-table -i input.json -o output.html -c Name Status
+          npm i node-json2html
+          json2html -i ${{ github.workspace }}\QA-Unitrac.json -o output.html -c Name Status
           echo "HTML file generated."
 
       - name: Upload HTML artifact
