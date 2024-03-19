@@ -13,15 +13,6 @@ on:
   workflow_dispatch:
   
 # Here the environment variable is declared in workflow level
-env:
-  # Replace with your Orchestrator Values 
-  PROJECT_NAME: uipath.github.action                         
-  PROJECT_FOLDER: ${{ github.action_path }}
-  ORCH_URL: "https://hpsilt435.hpillc.local:444"
-  ORCH_TENANT: "Default"
-  ORCH_applicationId: "2183c503-bc6e-479f-aa90-842d8d7b5ebe"
-  ORCH_applicationSecret: "5R4sViy^ZzVVzdsD"
-  ORCH_applicationScope : ${{vars.SCOPE}}
 
 jobs:
   print-details:
@@ -40,7 +31,7 @@ jobs:
       run: npm install js-yaml
 
     - name: Generate HTML
-      run: node generateHTML.js
+      run: node ${{ github.workspace }}\generateHTML.js
 
     - name: Upload HTML artifact
       uses: actions/upload-artifact@v2
