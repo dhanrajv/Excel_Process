@@ -38,3 +38,12 @@ jobs:
       with:
         name: html-output
         path: output.html
+
+  assign_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Name Variable
+        run: echo "name=Ravi" >> $GITHUB_ENV
+      - name: Use Name Variable
+        run: echo "Name is $name"
+
