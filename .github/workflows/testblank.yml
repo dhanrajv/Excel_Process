@@ -1,47 +1,12 @@
-# This is a basic workflow to help you get started with Actions
+name: Determine Trigger Type
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches:
-      - main
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # Example schedule: run daily at midnight UTC
-  
-# Here the environment variable is declared in workflow level
 
 jobs:
-  print-details:
-    runs-on: self-hosted
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install js-yaml
-
-    - name: Generate HTML
-      run: node ${{ github.workspace }}\generateHTML.js
-
-    - name: Upload HTML artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: html-output
-        path: output.html
-        
-  check_trigger:
+  determine_trigger:
     runs-on: ubuntu-latest
     steps:
       - name: Set Trigger Type
@@ -55,11 +20,3 @@ jobs:
         run: echo "Trigger type is ${{ env.TRIGGER_TYPE }}"
         env:
           TRIGGER_TYPE: ${{ env.TRIGGER_TYPE }}
-  assign_name:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Name Variable
-        run: echo "name=Ravi" >> $GITHUB_ENV
-      - name: Use Name Variable
-        run: echo "Name is $name"
-
