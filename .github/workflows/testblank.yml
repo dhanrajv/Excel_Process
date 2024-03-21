@@ -1,38 +1,15 @@
-name: Determine Trigger Type
+name: Scheduled Workflow
 
 on:
-  push:
-    branches:
-      - main
   schedule:
-  - cron: '*/1 * * * *' # Example schedule: run daily at midnight UTC
+    - cron: '* * * * *' # This will trigger the workflow at midnight every day
 
 jobs:
-  determine_trigger:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check if workflow is manually triggered
-        id: manual_trigger
-        if: github.event_name == 'workflow_dispatch'
-        run: echo "Manual"
-      
-      - name: Check if workflow is scheduled
-        id: scheduled_trigger
-        if: github.event_name != 'workflow_dispatch'
-        run: echo "Scheduled"
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-      - name: Set Trigger Type
-        run: |
-          if ($env:manual_trigger) {
-            echo "TriggerType=Manual" >> $GITHUB_ENV
-          }
-          else {
-            echo "TriggerType=Scheduled" >> $GITHUB_ENV
-          }
-
-      - name: Display Trigger Type
-        run: |
-          $triggerType = $env:TRIGGER_TYPE
-          Write-Output "Trigger type is $triggerType"
-        env:
-          TRIGGER_TYPE: ${{ env.TriggerType }}
+      # Add your workflow steps here
