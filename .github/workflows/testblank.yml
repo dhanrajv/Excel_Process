@@ -11,16 +11,22 @@ jobs:
     steps:
       - name: Check if workflow is manually triggered
         id: manual_trigger
-        run: |
-          if ($env:GITHUB_EVENT_NAME -eq 'workflow_dispatch') {
-            Write-Output "Manual"
-          }
-          else {
-            Write-Output "Scheduled"
-          }
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Manual"
+      
+      - name: Check if workflow is scheduled
+        id: scheduled_trigger
+        if: github.event_name != 'workflow_dispatch'
+        run: echo "Scheduled"
 
       - name: Set Trigger Type
-        run: echo "TriggerType=${{ steps.manual_trigger.outputs.result }}" >> $GITHUB_ENV
+        run: |
+          if ($env:manual_trigger) {
+            echo "TriggerType=Manual" >> $GITHUB_ENV
+          }
+          else {
+            echo "TriggerType=Scheduled" >> $GITHUB_ENV
+          }
 
       - name: Display Trigger Type
         run: |
