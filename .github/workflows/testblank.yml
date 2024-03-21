@@ -44,14 +44,17 @@ jobs:
   check_trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Trigger Type
+      - name: Set Trigger Type
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "ScheduleType=Manual" >> $GITHUB_ENV
+            echo "Manual" >> $GITHUB_ENV
           else
-            echo "ScheduleType=Scheduled" >> $GITHUB_ENV
+            echo "Scheduled" >> $GITHUB_ENV
           fi
-          echo "ScheduleType:  $ScheduleType"
+      - name: Display Trigger Type
+        run: echo "Trigger type is ${{ env.TRIGGER_TYPE }}"
+        env:
+          TRIGGER_TYPE: ${{ env.TRIGGER_TYPE }}
   assign_name:
     runs-on: ubuntu-latest
     steps:
