@@ -47,9 +47,9 @@ jobs:
       - name: Check Trigger Type
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            run: echo "ScheduleType=Manual" >> $GITHUB_ENV
+            echo "ScheduleType=Manual" >> $GITHUB_ENV
           else
-            run: echo "ScheduleType=Scheduled" >> $GITHUB_ENV
+            echo "ScheduleType=Scheduled" >> $GITHUB_ENV
           fi
           run: echo "ScheduleType:  $ScheduleType"
   assign_name:
