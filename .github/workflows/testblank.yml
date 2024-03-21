@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Check if workflow is manually triggered
         if: github.event_name == 'workflow_dispatch'
+          echo $github.event_name
         run: echo "Manual" >> $GITHUB_ENV
 
       - name: Check if workflow is scheduled
