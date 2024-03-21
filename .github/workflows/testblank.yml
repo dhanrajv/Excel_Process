@@ -1,9 +1,8 @@
 name: Determine Trigger Type
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # Example schedule: run daily at midnight UTC
+    - cron: '* * * * *' # Example schedule: run daily at midnight UTC
 
 jobs:
   determine_trigger:
