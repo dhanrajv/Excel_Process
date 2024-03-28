@@ -9,6 +9,6 @@ jobs:
 
     steps:
       - name: Extract Secret
-        run: echo "My secret is ${{ secrets.SCOPE }}"
+        run: echo "My secret is $SCOPE"
 
       # Add your workflow steps here
