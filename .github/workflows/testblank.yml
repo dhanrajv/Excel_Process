@@ -1,8 +1,7 @@
 name: Scheduled Workflow
 
 on:
-  schedule:
-    - cron: '* * * * *' # This will trigger the workflow at midnight every day
+  workflow_dispatch:
 
 jobs:
   example-job:
