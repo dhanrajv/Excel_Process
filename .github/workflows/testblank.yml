@@ -22,4 +22,3 @@ jobs:
         
             env:
               TERMINUS_RELEASE: ${{env.TERMINUS_RELEASE }}
-              echo "time $env.TERMINUS_RELEASE"
