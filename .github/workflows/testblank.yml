@@ -22,7 +22,7 @@ jobs:
         run: echo "The current time is ${{ steps.set_time.outputs.current_time }}"
   Print:
       needs: StartTime
-      runs-on: [self-hosted, windows, ADO]
+      runs-on: [self-hosted, windows]
       steps:
       - name: Use current time in another step
         run: echo "The current time is ${{ steps.set_time.outputs.current_time }}"
