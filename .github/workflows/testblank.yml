@@ -14,7 +14,7 @@ jobs:
       shell: pwsh
       run: |
         $TERMINUS_RELEASE = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-        Write-Output "TERMINUS_RELEASE=$TERMINUS_RELEASE" | $env:GITHUB_ENV
+        $env:TERMINUS_RELEASE = "TERMINUS_RELEASE=$TERMINUS_RELEASE"
 
     - name: Install Terminus
       shell: pwsh
