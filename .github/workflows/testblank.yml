@@ -9,17 +9,14 @@ jobs:
   StartTime:
     runs-on: [self-hosted, windows]
     steps:
-      - name: Assign Environment Variables
-        shell: pwsh
+      - name: Set current time to a variable
+        id: set_time
         run: |
-          $env:CURRENT_TIME = (Get-Date -Format 'yyyy-MM-ddTHH:mm:sszzz')
-          Write-Output "Assigning values to environment variables"
-          Write-Output "CURRENT_TIME: $env:CURRENT_TIME"  # Debug statement
-          # Export the environment variable
-          [System.Environment]::SetEnvironmentVariable("CURRENT_TIME", $env:CURRENT_TIME, [System.EnvironmentVariableTarget]::Process)
-          
-      - name: Display Current Time
-        shell: pwsh
-        run: |
-          $current_time = [System.Environment]::GetEnvironmentVariable("CURRENT_TIME", [System.EnvironmentVariableTarget]::Process)
-          Write-Output "Current Time: $current_time"
+          $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          Write-Host "::set-output name=current_time::$currentTime"
+
+      - name: Display current time
+        run: echo "Current time is ${{ steps.set_time.outputs.current_time }}"
+
+      - name: Use current time in another step
+        run: echo "The current time is ${{ steps.set_time.outputs.current_time }}"
