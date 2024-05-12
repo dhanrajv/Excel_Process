@@ -8,14 +8,18 @@ jobs:
     name: Build and Push
     runs-on: ubuntu-latest
     steps:
-      - name: Set tag var
-        id: vars
-        run: echo "docker_tag=$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}" >> $GITHUB_OUTPUT
-      - name: Docker Build
-        uses: "actions/docker/cli@master"
-        with:
-          args: build . --file Dockerfile -t cflynnus/blog:${{ steps.vars.outputs.docker_tag }}
-      - name: Docker Tag Latest
-        uses: "actions/docker/cli@master"
-        with:
-          args: tag cflynnus/blog:${{ steps.vars.outputs.docker_tag }} cflynnus/blog:latest
+    - name: Determine version
+      shell: bash
+      run: |
+        TERMINUS_RELEASE=$(curl --silent "https://api.github.com/repos/pantheon-systems/terminus/releases/latest" | perl -nle'print $& while m#"tag_name": "\K[^"]*#g')
+        echo "TERMINUS_RELEASE=$TERMINUS_RELEASE" >> $GITHUB_ENV
+
+    - name: Install Terminus
+      shell: bash
+      run: |
+        mkdir ~/terminus && cd ~/terminus
+        curl -L https://github.com/pantheon-systems/terminus/releases/download/$TERMINUS_RELEASE/terminus.phar --output terminus
+        chmod +x terminus
+        sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
+      env:
+        TERMINUS_RELEASE: ${{ inputs.terminus-version || env.TERMINUS_RELEASE }}
