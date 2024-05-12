@@ -13,7 +13,7 @@ jobs:
     - name: Determine version
       shell: bash
       run: |
-        TERMINUS_RELEASE=$(Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")
+        TERMINUS_RELEASE=5
         echo "TERMINUS_RELEASE=$TERMINUS_RELEASE" >> $GITHUB_ENV
 
     - name: Install Terminus
