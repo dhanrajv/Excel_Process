@@ -13,7 +13,7 @@ jobs:
         id: set_time
         run: |
           $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-          Write-Host "::set-output name=current_time::$currentTime"
+          Write-Host "::save-state name=current_time::$currentTime"
 
       - name: Display current time
         run: echo "Current time is ${{ steps.set_time.outputs.current_time }}"
