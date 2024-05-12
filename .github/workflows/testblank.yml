@@ -6,18 +6,16 @@ on:
       - master
       
 jobs:
-  build_and_push:
-    name: Build and Push
-    runs-on: [self-hosted, windows]
+  StartTime:
+    runs-on: [self-hosted, windows, ADO]
     steps:
-    - name: Determine version
-      shell: pwsh
-      run: |
-        $TERMINUS_RELEASE = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-        $env:TERMINUS_RELEASE = "$TERMINUS_RELEASE"
-
-    - name: Install Terminus
-      shell: pwsh
-      run: |
-            $TERMINUS_RELEASE = $env:TERMINUS_RELEASE
-            Write-Output $TERMINUS_RELEASE
+      - name: Assign Environment Variables
+        shell: pwsh
+        run: |
+          $env:CURRENT_TIME = (Get-Date -Format 'yyyy-MM-ddTHH:mm:sszzz')
+          Write-Output "Assigning values to environment variables"
+          
+      - name: Display Current Time
+        shell: pwsh
+        run: |
+          Write-Output "Current Time: $env:CURRENT_TIME"
