@@ -13,8 +13,8 @@ jobs:
     - name: Determine version
       shell: bash
       run: |
-        TERMINUS_RELEASE=$(curl --silent "https://api.github.com/repos/pantheon-systems/terminus/releases/latest" | perl -nle'print $& while m#"tag_name": "\K[^"]*#g')
-        echo "TERMINUS_RELEASE=$TERMINUS_RELEASE" >> $GITHUB_ENV
+        echo "Assigning values to environment variables"
+        echo "CURRENT_TIME=$(Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")" >> $GITHUB_ENV
 
     - name: Install Terminus
       shell: bash
@@ -24,4 +24,4 @@ jobs:
         chmod +x terminus
         sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
       env:
-        TERMINUS_RELEASE: ${{ inputs.terminus-version || env.TERMINUS_RELEASE }}
+        TERMINUS_RELEASE: ${{ Current Time || env.TERMINUS_RELEASE }}
