@@ -7,7 +7,7 @@ on:
       
 jobs:
   StartTime:
-    runs-on: [self-hosted, windows, ADO]
+    runs-on: [self-hosted, windows]
     steps:
       - name: Assign Environment Variables
         shell: pwsh
