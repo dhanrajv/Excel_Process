@@ -23,5 +23,5 @@ jobs:
     steps:
       - name: Use current time in another job
         run: |
-          currentTime="${{ needs.StartTime.outputs.current_time }}"
+          $currentTime="${{ needs.StartTime.outputs.current_time }}"
           echo "The current time is $currentTime"
