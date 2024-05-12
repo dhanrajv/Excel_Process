@@ -16,6 +16,12 @@ jobs:
           Write-Host "::set-output name=current_time::$currentTime"
       - name: Display current time
         run: echo "Current time is ${{ steps.set_time.outputs.current_time }}"
+        
+      - name: Save current time to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: time_artifact
+          path: current_time.txt
 
   Print:
     needs: StartTime
