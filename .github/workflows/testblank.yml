@@ -20,4 +20,4 @@ jobs:
       shell: pwsh
       run: |
             $TERMINUS_RELEASE = $env:TERMINUS_RELEASE
-            Write-Output "$TERMINUS_RELEASE"
+            Write-Output $TERMINUS_RELEASE
