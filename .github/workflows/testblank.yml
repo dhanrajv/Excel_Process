@@ -12,7 +12,7 @@ jobs:
       - name: Set current time to a variable
         id: set_time
         run: |
-          $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          $currentTime = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
           Write-Host "::set-output name=current_time::$currentTime"
 
       - name: Display current time
