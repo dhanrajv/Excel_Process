@@ -19,9 +19,7 @@ jobs:
     - name: Install Terminus
       shell: bash
       run: |
-        mkdir ~/terminus && cd ~/terminus
-        curl -L https://github.com/pantheon-systems/terminus/releases/download/$TERMINUS_RELEASE/terminus.phar --output terminus
-        chmod +x terminus
-        sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
-      env:
-        TERMINUS_RELEASE: ${{ inputs.CURRENT_TIME || env.TERMINUS_RELEASE }}
+        
+            env:
+              TERMINUS_RELEASE: ${{ inputs.CURRENT_TIME || env.TERMINUS_RELEASE }}
+              echo "time $env.TERMINUS_RELEASE"
