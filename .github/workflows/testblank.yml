@@ -8,7 +8,7 @@ on:
 jobs:
   build_and_push:
     name: Build and Push
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows]
     steps:
     - name: Determine version
       shell: bash
