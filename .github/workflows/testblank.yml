@@ -15,7 +15,7 @@ jobs:
         id: set_time
         run: |
           $currentTime = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-          Write-Output $currentTime
+          echo "::set-output name=current_time::$currentTime"
 
   Print:
     needs: StartTime
