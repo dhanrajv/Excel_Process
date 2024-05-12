@@ -8,32 +8,20 @@ on:
 jobs:
   StartTime:
     runs-on: [self-hosted, windows]
+    outputs:
+      current_time: ${{ steps.set_time.outputs.current_time }}
     steps:
       - name: Set current time to a variable
         id: set_time
         run: |
           $currentTime = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-          Write-Host "::set-output name=current_time::$currentTime"
-      - name: Display current time
-        run: echo "Current time is ${{ steps.set_time.outputs.current_time }}"
-        
-      - name: Save current time to artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: time_artifact
-          path: current_time.txt
+          Write-Output $currentTime
 
   Print:
     needs: StartTime
     runs-on: [self-hosted, windows]
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: time_artifact
-          path: time_artifact
-      
-      - name: Read current time from file
+      - name: Use current time in another job
         run: |
-          currentTime=$(cat time_artifact/current_time.txt)
+          currentTime="${{ needs.StartTime.outputs.current_time }}"
           echo "The current time is $currentTime"
