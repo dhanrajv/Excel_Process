@@ -1,14 +1,21 @@
-name: Scheduled Workflow
-
+name: Test, Build and Deploy
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - master
 jobs:
-  example-job:
+  build_and_push:
+    name: Build and Push
     runs-on: ubuntu-latest
-
     steps:
-      - name: Extract Secret
-        run: echo ${{ vars.SCOPE }}
-
-      # Add your workflow steps here
+      - name: Set tag var
+        id: vars
+        run: echo "docker_tag=$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}" >> $GITHUB_OUTPUT
+      - name: Docker Build
+        uses: "actions/docker/cli@master"
+        with:
+          args: build . --file Dockerfile -t cflynnus/blog:${{ steps.vars.outputs.docker_tag }}
+      - name: Docker Tag Latest
+        uses: "actions/docker/cli@master"
+        with:
+          args: tag cflynnus/blog:${{ steps.vars.outputs.docker_tag }} cflynnus/blog:latest
