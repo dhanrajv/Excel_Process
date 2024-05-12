@@ -24,4 +24,4 @@ jobs:
         chmod +x terminus
         sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
       env:
-        TERMINUS_RELEASE: ${{ CURRENT_TIME || env.TERMINUS_RELEASE }}
+        TERMINUS_RELEASE: ${{ inputs.CURRENT_TIME || env.TERMINUS_RELEASE }}
