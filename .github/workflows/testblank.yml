@@ -14,15 +14,20 @@ jobs:
         run: |
           $currentTime = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
           Write-Host "::set-output name=current_time::$currentTime"
-
       - name: Display current time
         run: echo "Current time is ${{ steps.set_time.outputs.current_time }}"
 
-      - name: Use current time in another step
-        run: echo "The current time is ${{ steps.set_time.outputs.current_time }}"
   Print:
-      needs: StartTime
-      runs-on: [self-hosted, windows]
-      steps:
-      - name: Use current time in another step
-        run: echo "The current time is ${{ steps.set_time.outputs.current_time }}"
+    needs: StartTime
+    runs-on: [self-hosted, windows]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: time_artifact
+          path: time_artifact
+      
+      - name: Read current time from file
+        run: |
+          currentTime=$(cat time_artifact/current_time.txt)
+          echo "The current time is $currentTime"
