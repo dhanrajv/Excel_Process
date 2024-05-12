@@ -15,8 +15,11 @@ jobs:
           $env:CURRENT_TIME = (Get-Date -Format 'yyyy-MM-ddTHH:mm:sszzz')
           Write-Output "Assigning values to environment variables"
           Write-Output "CURRENT_TIME: $env:CURRENT_TIME"  # Debug statement
+          # Export the environment variable
+          [System.Environment]::SetEnvironmentVariable("CURRENT_TIME", $env:CURRENT_TIME, [System.EnvironmentVariableTarget]::Process)
           
       - name: Display Current Time
         shell: pwsh
         run: |
-          Write-Output "Current Time: $env:CURRENT_TIME"
+          $current_time = [System.Environment]::GetEnvironmentVariable("CURRENT_TIME", [System.EnvironmentVariableTarget]::Process)
+          Write-Output "Current Time: $current_time"
