@@ -13,12 +13,10 @@ jobs:
     - name: Determine version
       shell: pwsh
       run: |
-        $TERMINUS_RELEASE=$(Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")
-        echo "TERMINUS_RELEASE=$TERMINUS_RELEASE" >> $GITHUB_ENV
+        $TERMINUS_RELEASE = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
+        Write-Output "TERMINUS_RELEASE=$TERMINUS_RELEASE" | $env:GITHUB_ENV -Append
 
     - name: Install Terminus
       shell: pwsh
       run: |
-        
-            env:
-              TERMINUS_RELEASE: ${{ inputs.CURRENT_TIME || env.TERMINUS_RELEASE }}
+            $TERMINUS_RELEASE = $env:TERMINUS_RELEASE
