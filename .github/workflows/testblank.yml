@@ -21,4 +21,4 @@ jobs:
       run: |
         
             env:
-              TERMINUS_RELEASE: ${{env.TERMINUS_RELEASE }}
+              TERMINUS_RELEASE: ${{ inputs.CURRENT_TIME || env.TERMINUS_RELEASE }}
