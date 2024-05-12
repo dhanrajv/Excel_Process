@@ -14,6 +14,7 @@ jobs:
         run: |
           $env:CURRENT_TIME = (Get-Date -Format 'yyyy-MM-ddTHH:mm:sszzz')
           Write-Output "Assigning values to environment variables"
+          Write-Output "CURRENT_TIME: $env:CURRENT_TIME"  # Debug statement
           
       - name: Display Current Time
         shell: pwsh
