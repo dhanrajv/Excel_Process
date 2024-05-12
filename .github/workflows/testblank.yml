@@ -11,13 +11,13 @@ jobs:
     runs-on: [self-hosted, windows]
     steps:
     - name: Determine version
-      shell: bash
+      shell: pwsh
       run: |
         TERMINUS_RELEASE=5
         echo "TERMINUS_RELEASE=$TERMINUS_RELEASE" >> $GITHUB_ENV
 
     - name: Install Terminus
-      shell: bash
+      shell: pwsh
       run: |
         
             env:
