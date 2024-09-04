@@ -1,19 +1,20 @@
+# .github/workflows/main-workflow.yml
 name: Main Workflow
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-      
+
+on: [push]
+
 jobs:
   build:
-    runs-on: Windows-latest
+    runs-on: windows-latest
 
     steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
     - name: Set up environment variable
       run: echo "MY_VAR=mystring-${{ secrets.Pwd }}" >> $GITHUB_ENV
 
     - name: Call Reusable Workflow
-      uses: ./.github/workflows/reusable-workflow.yml@v1
+      uses: ./.github/workflows/reusable-workflow.yml
       with:
         MY_VAR: ${{ env.MY_VAR }}
