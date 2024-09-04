@@ -1,3 +1,4 @@
+# .github/workflows/reusable-workflow.yml
 name: Reusable Workflow
 
 on:
@@ -9,7 +10,7 @@ on:
 
 jobs:
   process-input:
-    runs-on: Windows-latest
+    runs-on: windows-latest
     steps:
       - name: Print the input variable
         run: echo "The value of MY_VAR is ${{ inputs.MY_VAR }}"
