@@ -9,7 +9,7 @@ on:
 
 jobs:
   process-input:
-    runs-on: ubuntu-latest
+    runs-on: Windows-latest
     steps:
       - name: Print the input variable
         run: echo "The value of MY_VAR is ${{ inputs.MY_VAR }}"
