@@ -10,10 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
     - name: Set up environment variable
       run: echo "MY_VAR=mystring-${{ secrets.Pwd }}" >> $GITHUB_ENV
 
     - name: Call Reusable Workflow
-      uses: ./.github/workflows/reusable-workflow.yml
+      uses: ./.github/workflows/reusable-workflow.yml@main
       with:
         MY_VAR: ${{ env.MY_VAR }}
