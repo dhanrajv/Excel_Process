@@ -1,0 +1,15 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      MY_VAR:
+        required: true
+        type: string
+
+jobs:
+  process-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the input variable
+        run: echo "The value of MY_VAR is ${{ inputs.MY_VAR }}"
