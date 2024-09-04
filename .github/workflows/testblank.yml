@@ -5,23 +5,17 @@ on:
     branches:
       - master
       
-jobs:
-  StartTime:
-    runs-on: [self-hosted, windows]
-    outputs:
-      current_time: ${{ steps.set_time.outputs.current_time }}
-    steps:
-      - name: Set current time to a variable
-        id: set_time
-        run: |
-          $currentTime = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-          echo "::set-output name=current_time::$currentTime"
 
-  Print:
-    needs: StartTime
-    runs-on: [self-hosted, windows]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Use current time in another job
-        run: |
-          $currentTime="${{ needs.StartTime.outputs.current_time }}"
-          echo "The current time is $currentTime"
+    - name: Set up environment variable
+      run: echo "MY_VAR=mystring-${{ secrets.Pwd }}" >> $GITHUB_ENV
+
+    - name: Use environment variable
+      run: echo "The value of MY_VAR is $MY_VAR"
+      env:
+        MY_VAR: ${{ env.MY_VAR }}
