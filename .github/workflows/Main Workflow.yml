@@ -7,13 +7,13 @@ on:
       
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Windows-latest
 
     steps:
     - name: Set up environment variable
       run: echo "MY_VAR=mystring-${{ secrets.Pwd }}" >> $GITHUB_ENV
 
     - name: Call Reusable Workflow
-      uses: ./.github/workflows/reusable-workflow.yml
+      uses: ./.github/workflows/reusable-workflow.yml@v1
       with:
         MY_VAR: ${{ env.MY_VAR }}
