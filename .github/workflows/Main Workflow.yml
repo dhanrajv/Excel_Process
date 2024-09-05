@@ -11,5 +11,6 @@ jobs:
       some_input: "static value"  # Some input specific to the reusable workflow
     secrets:
       SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}  # Passing the secret
+    # The 'env' keyword should be outside the 'uses' block
     env:
       COMBINED_VAR: "Hello-${{ secrets.SECRET_TOKEN }}"  # Combine string and secret
