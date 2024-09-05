@@ -4,13 +4,18 @@ name: Reusable Workflow
 on:
   workflow_call:
     inputs:
-      MY_VAR:
+      some_input:
         required: true
         type: string
+    secrets:
+      SECRET_TOKEN:
+        required: true
 
 jobs:
-  process-input:
-    runs-on: windows-latest
+  process:
+    runs-on: ubuntu-latest
     steps:
-      - name: Print the input variable
-        run: echo "The value of MY_VAR is ${{ inputs.MY_VAR }}"
+      - name: Print combined variable
+        run: |
+          echo "The combined value is $COMBINED_VAR"
+          # You can now use $COMBINED_VAR in other steps as well
